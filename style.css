@@ -1,0 +1,311 @@
+/* General Styles */
+:root {
+    --primary-color: #4CAF50; /* Green */
+    --secondary-color: #007bff; /* Blue */
+    --danger-color: #dc3545; /* Red */
+    --background-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --label-color: #555;
+    --border-color: #ddd;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+    --font-family: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    color: var(--text-color);
+}
+
+/* Calculator Card */
+.calculator-wrapper {
+    width: 100%;
+    max-width: 450px;
+}
+
+.calculator-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px var(--shadow-medium);
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.calculator-title {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--label-color);
+    font-size: 0.95em;
+}
+
+.input-group input[type="number"],
+.input-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    color: var(--text-color);
+    background-color: #fefefe;
+    box-shadow: inset 0 1px 3px var(--shadow-light);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    -webkit-appearance: none; /* Remove default styling for select/number */
+    -moz-appearance: textfield; /* Firefox number input */
+}
+
+.input-group input[type="number"]:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.input-group input[type="number"]::-webkit-outer-spin-button,
+.input-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-group input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.custom-rate-input-group {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 100px; /* Adjust as needed */
+    opacity: 1;
+    overflow: hidden;
+}
+
+.custom-rate-input-group.hidden {
+    max-height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+}
+
+/* Buttons */
+.button-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.button-row.operation-buttons {
+    margin-bottom: 20px;
+}
+
+.btn {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    color: white; /* Default text color for all buttons */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3);
+}
+
+.btn-success {
+    background-color: var(--primary-color); /* Using primary color for calculate as well */
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* Active operation button state */
+.operation-buttons .btn.active {
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+    transform: scale(1.02);
+    border: 2px solid #3d8c41; /* Slightly darker border for active */
+}
+
+/* Results Display */
+.results-display {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: inset 0 1px 5px var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+    max-height: 300px; /* Max height to allow transition */
+    opacity: 1;
+    overflow: hidden; /* Hide overflow during transition */
+}
+
+.results-display.hidden {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.05em;
+    color: var(--label-color);
+}
+
+.result-item span:first-child {
+    font-weight: 500;
+}
+
+.amount-value {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.main-result {
+    font-size: 1.2em;
+    color: var(--primary-color);
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border-color);
+    margin-bottom: 10px;
+}
+
+.main-result .amount-value {
+    font-size: 1.3em;
+    color: var(--primary-color);
+}
+
+
+/* Toast Message */
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    pointer-events: none; /* Allows clicks to pass through when hidden */
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px); /* Slight lift animation */
+    pointer-events: auto;
+}
+
+.toast-message.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 500px) {
+    .calculator-card {
+        padding: 20px;
+        margin: 0 10px; /* Add some margin on very small screens */
+    }
+
+    .calculator-title {
+        font-size: 1.5em;
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .result-item {
+        font-size: 0.95em;
+    }
+
+    .main-result {
+        font-size: 1.1em;
+    }
+
+    .main-result .amount-value {
+        font-size: 1.2em;
+    }
+
+    .toast-message {
+        width: calc(100% - 40px); /* Full width minus padding */
+        left: 20px;
+        transform: translateX(0); /* Remove translateX for full width */
+    }
+    .toast-message.show {
+        transform: translateY(-10px);
+    }
+    .toast-message.hidden {
+        transform: translateY(0);
+    }
+}
